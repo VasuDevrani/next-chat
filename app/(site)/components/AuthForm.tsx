@@ -1,27 +1,28 @@
 "use client";
 
-import Button from "@/app/components/Button/Button";
-import Input from "@/app/components/input/Input";
-import { useCallback, useEffect, useState } from "react";
-import { FieldValues, useForm, SubmitHandler } from "react-hook-form";
-import AuthSocialButton from "./AuthSocialButton";
-import { BsGoogle, BsGithub } from "react-icons/bs";
 import axios from "axios";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
+import { useCallback, useEffect, useState } from "react";
+import { BsGithub, BsGoogle } from "react-icons/bs";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+
+import Input from "@/app/components/input/Input";
+import AuthSocialButton from "./AuthSocialButton";
+import Button from "@/app/components/Button/Button";
+import { toast } from "react-hot-toast";
 
 type Variant = "LOGIN" | "REGISTER";
 
 const AuthForm = () => {
+  const session = useSession();
+  const router = useRouter();
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-  const session = useSession();
 
   useEffect(() => {
-    if (session?.status === 'authenticated') {
-      router.push('/conversations')
+    if (session?.status === "authenticated") {
+      router.push("/conversations");
     }
   }, [session?.status, router]);
 
@@ -170,19 +171,18 @@ const AuthForm = () => {
               </span>
             </div>
           </div>
-        </div>
 
-        <div className="mt-6 flex gap-2">
-          <AuthSocialButton
-            icon={BsGithub}
-            onClick={() => socialAction("github")}
-          />
-          <AuthSocialButton
-            icon={BsGoogle}
-            onClick={() => socialAction("google")}
-          />
+          <div className="mt-6 flex gap-2">
+            <AuthSocialButton
+              icon={BsGithub}
+              onClick={() => socialAction("github")}
+            />
+            <AuthSocialButton
+              icon={BsGoogle}
+              onClick={() => socialAction("google")}
+            />
+          </div>
         </div>
-
         <div
           className="
             flex 
