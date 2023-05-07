@@ -28,7 +28,7 @@ const MobileFooter = () => {
       "
     >
       {routes.map((route) => (
-        <MobileItem
+        <MobileItem 
           key={route.href} 
           href={route.href} 
           active={route.active} 
