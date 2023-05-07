@@ -3,7 +3,9 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-import useConversation from "@/app/hooks/useConversations";import { FullMessageType } from "@/app/types";
+import useConversation from "@/app/hooks/useConversations";
+import MessageBox from "./MessageBox";
+import { FullMessageType } from "@/app/types";
 import { find } from "lodash";
 
 interface BodyProps {
@@ -12,6 +14,7 @@ interface BodyProps {
 
 const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
   const bottomRef = useRef<HTMLDivElement>(null);
+  const [messages, setMessages] = useState(initialMessages);
   
   const { conversationId } = useConversation();
 
@@ -21,6 +24,13 @@ const Body: React.FC<BodyProps> = ({ initialMessages = [] }) => {
 
   return ( 
     <div className="flex-1 overflow-y-auto">
+      {messages.map((message, i) => (
+        <MessageBox 
+          isLast={i === messages.length - 1} 
+          key={message.id} 
+          data={message}
+        />
+      ))}
       <div className="pt-24" ref={bottomRef} />
     </div>
   );

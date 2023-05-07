@@ -12,6 +12,7 @@ import { find, uniq } from 'lodash';
 import { FullConversationType } from "@/app/types";
 import useConversation from "@/app/hooks/useConversations";
 import ConversationBox from "./ConversationBox";
+import GroupChatModal from "@/app/components/Modals/GroupChatModal";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
@@ -78,11 +79,11 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
   return (
     <>
-      {/* <GroupChatModal 
+      <GroupChatModal
         users={users} 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)}
-      /> */}
+      />
       <aside className={clsx(`
         fixed 
         inset-y-0 
