@@ -1,8 +1,9 @@
+import EmptyState from "../components/EmptyState/EmptyState";
 
 const People = () => {
   return (
     <div className="hidden lg:block lg:pl-80 h-full">
-        users
+        <EmptyState/>
     </div>
    );
 }
