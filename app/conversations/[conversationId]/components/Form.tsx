@@ -11,6 +11,7 @@ import {
   useForm 
 } from "react-hook-form";
 import axios from "axios";
+import { CldUploadButton } from "next-cloudinary";
 import useConversation from "@/app/hooks/useConversations";
 
 const Form = () => {
@@ -58,6 +59,13 @@ const Form = () => {
         w-full
       "
     >
+      <CldUploadButton 
+        options={{ maxFiles: 1 }} 
+        onUpload={handleUpload} 
+        uploadPreset="pgc9ehd5"
+      >
+        <HiPhoto size={30} className="text-sky-500" />
+      </CldUploadButton>
       <form 
         onSubmit={handleSubmit(onSubmit)} 
         className="flex items-center gap-2 lg:gap-4 w-full"
